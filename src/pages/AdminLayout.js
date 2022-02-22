@@ -12,7 +12,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined";
 
-const drawerWidth = 230;
+const drawerWidth = 200;
 
 const drawerLinks = [
   {
@@ -61,7 +61,7 @@ const AdminLayout = ({ children }) => {
         variant="permanent"
         anchor="left"
       >
-        <h3>HOTEL</h3>
+        <h3 style={{ visibility: "hidden" }}>HOTEL</h3>
         <Divider />
         <List style={{ marginTop: "10px" }}>
           {drawerLinks.map((link) => (
@@ -76,7 +76,7 @@ const AdminLayout = ({ children }) => {
                 style={{ color: "#1769aa", fontWeight: "bolder" }}
                 primary={link.text}
               />
-              <ListItemIcon>{link.rightIcon}</ListItemIcon>
+              {/* <ListItemIcon>{link.rightIcon}</ListItemIcon> */}
             </ListItem>
           ))}
         </List>
