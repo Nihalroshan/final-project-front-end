@@ -8,10 +8,10 @@ import {
 } from "@mui/material";
 
 const AdminProductCard = (props) => {
-  const { product, onClick } = props;
+  const { product } = props;
 
   return (
-    <Card onClick={onClick(true)} sx={{ width: 200, margin: "10px" }}>
+    <Card sx={{ width: 200, margin: "10px" }}>
       <CardActionArea>
         <CardMedia component="img" height="100" image={product.image} />
         <CardContent>

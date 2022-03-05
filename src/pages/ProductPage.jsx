@@ -87,12 +87,12 @@ const ProductPage = () => {
           Add Product
         </Button>
         <Drawer anchor="right" open={drawerState} onClose={toggleDrawer(false)}>
-          <AddProduct />
+          <AddProduct toggleDrawer={toggleDrawer} />
         </Drawer>
       </Container>
       <Container sx={{ display: "flex", flexWrap: "wrap" }}>
         {products.map((product) => {
-          return <AdminProductCard onClick={toggleDrawer} product={product} />;
+          return <AdminProductCard product={product} />;
         })}
       </Container>
     </>
