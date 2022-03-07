@@ -19,7 +19,7 @@ const AdminProductCard = (props) => {
             {product.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            PRICE : {product.price}
+            {product.price}
           </Typography>
         </CardContent>
       </CardActionArea>

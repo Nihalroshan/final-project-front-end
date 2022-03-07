@@ -1,8 +1,8 @@
 import { Button, Container, Drawer, Typography } from "@mui/material";
 import { useState } from "react";
-import AdminProductCard from "../components/AdminProductCard";
+import AdminProductCard from "../../components/admin/AdminProductCard";
 import AddIcon from "@mui/icons-material/Add";
-import AddProduct from "../components/AddProduct";
+import AddProduct from "../../components/admin/AddProduct";
 
 const products = [
   {
@@ -48,7 +48,7 @@ const products = [
       "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
   },
   {
-    name: "Pizza",
+    name: "Pizza ",
     price: "20$",
     image:
       "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
@@ -91,8 +91,8 @@ const ProductPage = () => {
         </Drawer>
       </Container>
       <Container sx={{ display: "flex", flexWrap: "wrap" }}>
-        {products.map((product) => {
-          return <AdminProductCard product={product} />;
+        {products.map((product, i) => {
+          return <AdminProductCard key={i} product={product} />;
         })}
       </Container>
     </>

@@ -9,8 +9,9 @@ import {
 } from "@mui/material";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined";
+import CategoryIcon from "@mui/icons-material/Category";
+import { Link, Outlet } from "react-router-dom";
 
 const drawerWidth = 200;
 
@@ -18,21 +19,26 @@ const drawerLinks = [
   {
     text: "Dashboard",
     leftIcon: <DashboardOutlinedIcon color="primary" />,
-    rightIcon: "",
+    path: "",
   },
   {
     text: "Products",
     leftIcon: <ShoppingCartIcon color="primary" />,
-    rightIcon: <KeyboardArrowRightIcon color="primary" />,
+    path: "/admin/products",
+  },
+  {
+    text: "Categories",
+    leftIcon: <CategoryIcon color="primary" />,
+    path: "/admin/categories",
   },
   {
     text: "Orders",
     leftIcon: <AssessmentOutlinedIcon color="primary" />,
-    rightIcon: <KeyboardArrowRightIcon color="primary" />,
+    path: "",
   },
 ];
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = () => {
   const styles = {
     appbar: {
       backgroundColor: "white",
@@ -64,20 +70,17 @@ const AdminLayout = ({ children }) => {
         <h3 style={{ visibility: "hidden" }}>HOTEL</h3>
         <Divider />
         <List style={{ marginTop: "10px" }}>
-          {drawerLinks.map((link) => (
-            <ListItem
-              key={link.text}
-              onClick={(e) => console.log(e.target.innerText)}
-              style={styles.list}
-              button
-            >
-              <ListItemIcon>{link.leftIcon}</ListItemIcon>
-              <ListItemText
-                style={{ color: "#1769aa", fontWeight: "bolder" }}
-                primary={link.text}
-              />
-              {/* <ListItemIcon>{link.rightIcon}</ListItemIcon> */}
-            </ListItem>
+          {drawerLinks.map((link, i) => (
+            <Link key={i} style={{ textDecoration: "none" }} to={link.path}>
+              <ListItem key={link.text} style={styles.list} button>
+                <ListItemIcon>{link.leftIcon}</ListItemIcon>
+                <ListItemText
+                  style={{ color: "#1769aa", fontWeight: "bolder" }}
+                  primary={link.text}
+                />
+                {/* <ListItemIcon>{link.rightIcon}</ListItemIcon> */}
+              </ListItem>
+            </Link>
           ))}
         </List>
       </Drawer>
@@ -88,7 +91,7 @@ const AdminLayout = ({ children }) => {
           height: `calc(100vh - 58px)`,
         }}
       >
-        {children}
+        <Outlet />
       </div>
     </div>
   );
