@@ -1,6 +1,5 @@
 import {
   Button,
-  Card,
   Chip,
   Container,
   Grid,
@@ -8,7 +7,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Box } from "@mui/system";
 
 const ProductPage = () => {
   return (
