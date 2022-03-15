@@ -1,99 +1,112 @@
-import { Button, Container, Drawer, Typography } from "@mui/material";
-import { useState } from "react";
-import AdminProductCard from "../../components/admin/AdminProductCard";
-import AddIcon from "@mui/icons-material/Add";
-import AddProduct from "../../components/admin/AddProduct";
-
-const products = [
-  {
-    name: "Chicken Burger",
-    price: "20$",
-    image:
-      "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/jr2l2nwwodytmkecuiut",
-  },
-  {
-    name: "Chicken Shawarma",
-    price: "40$",
-    image:
-      "https://www.licious.in/blog/wp-content/uploads/2020/12/Chicken-Shawarma.jpg",
-  },
-  {
-    name: "Chicken Biriyani",
-    price: "20$",
-    image:
-      "https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Chicken-Biryani-Recipe-500x500.jpg",
-  },
-  {
-    name: "Pizza",
-    price: "20$",
-    image:
-      "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
-  },
-  {
-    name: "Pizza",
-    price: "20$",
-    image:
-      "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
-  },
-  {
-    name: "Pizza",
-    price: "20$",
-    image:
-      "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
-  },
-  {
-    name: "Pizza",
-    price: "20$",
-    image:
-      "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
-  },
-  {
-    name: "Pizza ",
-    price: "20$",
-    image:
-      "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
-  },
-];
+import {
+  Button,
+  Card,
+  Chip,
+  Container,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { Box } from "@mui/system";
 
 const ProductPage = () => {
-  const [drawerState, setDrawerState] = useState(false);
-
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setDrawerState(open);
-  };
-
   return (
     <>
       <Container
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          marginTop: "10px",
+          marginTop: "40px",
+          height: "70vh",
         }}
       >
-        <Typography variant="h6">Products</Typography>
-        <Button
-          onClick={toggleDrawer(true)}
-          startIcon={<AddIcon />}
-          variant="contained"
-        >
-          Add Product
-        </Button>
-        <Drawer anchor="right" open={drawerState} onClose={toggleDrawer(false)}>
-          <AddProduct toggleDrawer={toggleDrawer} />
-        </Drawer>
-      </Container>
-      <Container sx={{ display: "flex", flexWrap: "wrap" }}>
-        {products.map((product, i) => {
-          return <AdminProductCard key={i} product={product} />;
-        })}
+        <Paper elevation={3} sx={{ padding: "30px" }}>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="flex-start"
+                sx={{
+                  marginTop: "10px",
+                  height: "90vh",
+                }}
+              >
+                <Grid item>
+                  <img
+                    style={{
+                      marginTop: "35px",
+                      height: "300px",
+                      width: "100%",
+                      borderRadius:"10px"
+                    }}
+                    src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={8}>
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                sx={{
+                  margin: "50px",
+                  height: "90vh",
+                }}
+              >
+                <Grid item style={{ padding: "0 30px" }}>
+                  <Typography variant="h4">Chicken fry</Typography>
+                  <Typography variant="subtitle1">Category</Typography>
+
+                  <Stack direction="row" spacing={2}>
+                    <Chip
+                      style={{ marginTop: "20px" }}
+                      color="primary"
+                      label="PRICE:$44"
+                    />
+                    <Chip
+                      style={{ marginTop: "20px" }}
+                      color="success"
+                      label="IN STOCK"
+                    />
+                  </Stack>
+
+                  <Typography style={{ marginTop: "20px" }} variant="body2">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Modi nostrum dolore, vitae, distinctio officia obcaecati
+                    cumque esse quibusdam id odit a maiores tempora inventore?
+                    Explicabo accusamus alias eveniet deleniti amet?Lorem ipsum
+                    dolor sit amet consectetur adipisicing elit. Minima quae
+                    sequi dolore consequuntur quibusdam enim obcaecati tempora!
+                    Autem illo exercitationem vero magnam iusto cupiditate, cum
+                    esse quaerat similique aperiam pariatur.
+                  </Typography>
+
+                  <Stack
+                    style={{
+                      marginTop: "30px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                    direction="row"
+                    spacing={2}
+                  >
+                    <Button color="warning" variant="contained">
+                      Edit
+                    </Button>
+                    <Button color="error" variant="contained">
+                      Delete
+                    </Button>
+                  </Stack>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
       </Container>
     </>
   );
