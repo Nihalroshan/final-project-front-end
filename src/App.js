@@ -7,13 +7,15 @@ import CategoriesPage from "./pages/admin/CategoriesPage";
 import UserLayout from "./Layouts/UserLayout";
 import ProductPage from "./pages/admin/ProductPage";
 import OrderPage from "./pages/admin/OrderPage";
+import LoginPage from "./pages/admin/LoginPage";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<DashboardPage />} />
-          <Route path="product" element={<ProductPage/>}/>
+          <Route path="product" element={<ProductPage />} />
           <Route path="products" element={<ProductsPage />} />
           <Route path="categories" element={<CategoriesPage />} />
           <Route path="orders" element={<OrderPage />} />
