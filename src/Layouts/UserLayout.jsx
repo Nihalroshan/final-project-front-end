@@ -8,9 +8,16 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+/// imports for card
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import CategoryIcon from "@mui/icons-material/Category";
 import { useState } from "react";
+import { borderRadius } from "@mui/system";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -43,6 +50,27 @@ const UserLayout = () => {
             )}
           />
         </Stack>
+
+        {/* card */}
+        <Card sx={{ maxWidth: 150, padding: 5, borderRadius: 5 ,backgroundColor:"#3fr"}}>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              height="100"
+              image="https://media.istockphoto.com/photos/fried-pork-and-vegetables-on-white-background-picture-id1190330112?k=20&m=1190330112&s=612x612&w=0&h=_TrmthJupdqYmMU-NC-es85TEvaBJsynDS383hqiAvM="
+              alt="green iguana"
+              sx={{ objectFit: "cover" }}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div" sx={{fontSize:20}}>
+                Beef potato
+              </Typography>
+              <Typography gutterBottom variant="h5" component="div" sx={{fontSize:30 ,color:"red"}}>
+                $12,00
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
         <Paper
           sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
           elevation={3}
