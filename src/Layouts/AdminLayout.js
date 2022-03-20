@@ -75,7 +75,7 @@ const AdminLayout = () => {
               <ListItem key={link.text} style={styles.list} button>
                 <ListItemIcon>{link.leftIcon}</ListItemIcon>
                 <ListItemText
-                  style={{ color: "#1769aa", fontWeight: "bolder" }}
+                  style={{ color: "#6642b4", fontWeight: "bolder" }}
                   primary={link.text}
                 />
                 {/* <ListItemIcon>{link.rightIcon}</ListItemIcon> */}

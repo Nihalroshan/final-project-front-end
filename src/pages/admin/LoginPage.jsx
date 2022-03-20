@@ -4,16 +4,16 @@ import {
   Typography,
   TextField,
   Button,
-  Alert,
+  // Alert,
 } from "@mui/material";
-import axios from "axios";
+// import axios from "axios";
 import { useState } from "react";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
   const handleSubmit = async () => {
     const user = {
@@ -64,7 +64,7 @@ const LoginPage = () => {
               label="Type your Password"
               variant="outlined"
             />
-            {error && <Alert severity="error">{error}</Alert>}
+            {/* {error && <Alert severity="error">{error}</Alert>} */}
 
             <Button
               type="submit"

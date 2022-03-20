@@ -40,7 +40,7 @@ const ProductPage = () => {
                       width: "100%",
                       borderRadius:"10px"
                     }}
-                    alt="image"
+                    alt="food"
                     src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
                   />
                 </Grid>
