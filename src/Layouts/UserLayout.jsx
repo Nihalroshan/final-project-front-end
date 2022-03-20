@@ -6,7 +6,7 @@ import {
   Grid,
   Paper,
   Stack,
-  TextField,
+  TextField
 } from "@mui/material";
 /// imports for card
 import Card from "@mui/material/Card";
@@ -26,7 +26,7 @@ const top100Films = [
   { title: "The Dark Knight", year: 2008 },
   { title: "12 Angry Men", year: 1957 },
   { title: "Schindler's List", year: 1993 },
-  { title: "Pulp Fiction", year: 1994 },
+  { title: "Pulp Fiction", year: 1994 }
 ];
 
 const UserLayout = () => {
@@ -52,20 +52,47 @@ const UserLayout = () => {
         </Stack>
 
         {/* card */}
-        <Card sx={{ maxWidth: 150, padding: 5, borderRadius: 5 ,backgroundColor:"#3fr"}}>
+        <Card
+          sx={{
+            maxWidth: 100,
+            padding: 3,
+            borderRadius: 10,
+            backgroundColor: "#ededed",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
           <CardActionArea>
             <CardMedia
               component="img"
               height="100"
               image="https://media.istockphoto.com/photos/fried-pork-and-vegetables-on-white-background-picture-id1190330112?k=20&m=1190330112&s=612x612&w=0&h=_TrmthJupdqYmMU-NC-es85TEvaBJsynDS383hqiAvM="
               alt="green iguana"
-              sx={{ objectFit: "cover" }}
+              sx={{ objectFit: "cover", borderRadius: "50%" }}
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div" sx={{fontSize:20}}>
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection:"column",
+                // justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Typography
+                gutterBottom
+                variant="h5"
+                // component="div"
+                sx={{ fontSize: 13, fontWeight: 500 }}
+              >
                 Beef potato
               </Typography>
-              <Typography gutterBottom variant="h5" component="div" sx={{fontSize:30 ,color:"red"}}>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{ fontSize: 20, color: "red" }}
+              >
                 $12,00
               </Typography>
             </CardContent>
