@@ -34,7 +34,7 @@ const drawerLinks = [
   {
     text: "Orders",
     leftIcon: <AssessmentOutlinedIcon color="primary" />,
-    path: "",
+    path: "/admin/orders",
   },
 ];
 
