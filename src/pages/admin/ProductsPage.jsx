@@ -1,62 +1,45 @@
 import { Button, Container, Drawer, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AdminProductCard from "../../components/admin/AdminProductCard";
 import AddIcon from "@mui/icons-material/Add";
 import AddProduct from "../../components/admin/AddProduct";
-
-const products = [
-  {
-    name: "Chicken Burger",
-    price: "20$",
-    image:
-      "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/jr2l2nwwodytmkecuiut",
-  },
-  {
-    name: "Chicken Shawarma",
-    price: "40$",
-    image:
-      "https://www.licious.in/blog/wp-content/uploads/2020/12/Chicken-Shawarma.jpg",
-  },
-  {
-    name: "Chicken Biriyani",
-    price: "20$",
-    image:
-      "https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Chicken-Biryani-Recipe-500x500.jpg",
-  },
-  {
-    name: "Pizza",
-    price: "20$",
-    image:
-      "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
-  },
-  {
-    name: "Pizza",
-    price: "20$",
-    image:
-      "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
-  },
-  {
-    name: "Pizza",
-    price: "20$",
-    image:
-      "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
-  },
-  {
-    name: "Pizza",
-    price: "20$",
-    image:
-      "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
-  },
-  {
-    name: "Pizza ",
-    price: "20$",
-    image:
-      "https://www.tasteofhome.com/wp-content/uploads/2018/01/Pizza-from-Scratch_EXPS_FT20_8621_F_0505_1_home-7.jpg",
-  },
-];
+import productService from "../../services/productService";
 
 const ProductsPage = () => {
+  const [products, setProducts] = useState([]);
+  // const [productLoader, setProductLoader] = useState(false);
   const [drawerState, setDrawerState] = useState(false);
+
+  const getProducts = async () => {
+    try {
+      const products = await productService.getProducts();
+      setProducts(products);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    // const getProducts = async () => {
+    //   try {
+    //     const products = await productService.getProducts();
+    //     setProducts(products);
+    //   } catch (err) {
+    //     console.log(err.message);
+    //   }
+    // };
+    getProducts();
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await productService.deleteProduct(id);
+      if (response.status === 200) getProducts();
+      console.log(response);
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  };
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -87,13 +70,26 @@ const ProductsPage = () => {
           Add Product
         </Button>
         <Drawer anchor="right" open={drawerState} onClose={toggleDrawer(false)}>
-          <AddProduct toggleDrawer={toggleDrawer} />
+          <AddProduct
+            // productLoader={productLoader}
+            // setProductLoader={setProductLoader}
+            getProducts={getProducts}
+            toggleDrawer={toggleDrawer}
+          />
         </Drawer>
       </Container>
       <Container sx={{ display: "flex", flexWrap: "wrap" }}>
-        {products.map((product, i) => {
-          return <AdminProductCard key={i} product={product} />;
-        })}
+        {products &&
+          products.map((product, i) => {
+            return (
+              <AdminProductCard
+                handleDelete={handleDelete}
+                key={i}
+                product={product}
+                price
+              />
+            );
+          })}
       </Container>
     </>
   );
