@@ -16,11 +16,11 @@ import { Link, Outlet } from "react-router-dom";
 const drawerWidth = 200;
 
 const drawerLinks = [
-  {
-    text: "Dashboard",
-    leftIcon: <DashboardOutlinedIcon color="primary" />,
-    path: "",
-  },
+  // {
+  //   text: "Dashboard",
+  //   leftIcon: <DashboardOutlinedIcon color="primary" />,
+  //   path: "",
+  // },
   {
     text: "Products",
     leftIcon: <ShoppingCartIcon color="primary" />,

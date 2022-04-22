@@ -1,46 +1,22 @@
-import { Autocomplete, Container, Grid, Stack, TextField } from "@mui/material";
+import { Container, Grid } from "@mui/material";
+import { useState, useEffect } from "react";
 
 import ProductCard from "../../components/client/ProductCard";
-
-const categories = [
-  {
-    name: "Breakfast",
-    image:
-      "https://c.ndtvimg.com/2021-02/e2uarbeo_juice-_625x300_25_February_21.jpg",
-  },
-  {
-    name: "Dinner",
-    image:
-      "https://c.ndtvimg.com/2021-02/e2uarbeo_juice-_625x300_25_February_21.jpg",
-  },
-  {
-    name: "Lunch",
-    image:
-      "https://c.ndtvimg.com/2021-02/e2uarbeo_juice-_625x300_25_February_21.jpg",
-  },
-  {
-    name: "Beverages",
-    image:
-      "https://c.ndtvimg.com/2021-02/e2uarbeo_juice-_625x300_25_February_21.jpg",
-  },
-  {
-    name: "Arabian",
-    image:
-      "https://c.ndtvimg.com/2021-02/e2uarbeo_juice-_625x300_25_February_21.jpg",
-  },
-  {
-    name: "Continental",
-    image:
-      "https://c.ndtvimg.com/2021-02/e2uarbeo_juice-_625x300_25_February_21.jpg",
-  },
-  {
-    name: "Mexican",
-    image:
-      "https://c.ndtvimg.com/2021-02/e2uarbeo_juice-_625x300_25_February_21.jpg",
-  },
-];
+import categoryService from "../../services/categoryService";
 
 const CategoriesPage = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const response = await categoryService.getCategories();
+        setCategories(response);
+      } catch (err) {}
+    };
+    getCategories();
+  }, []);
+
   return (
     <div>
       <Container>
@@ -58,11 +34,12 @@ const CategoriesPage = () => {
 
         {/* card */}
         <Grid container spacing={2}>
-          {categories.map((category) => (
-            <Grid item xs={6} md={2}>
-              <ProductCard product={category} />
-            </Grid>
-          ))}
+          {categories &&
+            categories.map((category) => (
+              <Grid item xs={6} md={2}>
+                <ProductCard product={category} />
+              </Grid>
+            ))}
         </Grid>
       </Container>
     </div>

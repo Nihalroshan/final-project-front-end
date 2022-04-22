@@ -8,17 +8,33 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import categoryService from "../../services/categoryService";
 
-const AddCategory = ({ toggleDrawer }) => {
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
+const AddCategory = ({ toggleDrawer, getCategories }) => {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
-  const handleSubmit = () => {
+  const clearInput = () => {
+    setName("");
+    setDescription("");
+  };
+
+  const handleSubmit = async () => {
     const categoryDetails = {
       name,
       description,
     };
-    console.log(categoryDetails);
+    try {
+      const response = await categoryService.createCategory(categoryDetails);
+      if (response.status === 200) {
+        clearInput();
+        getCategories();
+        // setCategoryLoader(!categoryLoader);
+      }
+      console.log(response);
+    } catch (err) {
+      console.log(err.response.data);
+    }
   };
 
   return (
@@ -45,6 +61,7 @@ const AddCategory = ({ toggleDrawer }) => {
           <TextField
             sx={{ margin: "10px" }}
             variant="outlined"
+            value={name}
             label="Name"
             onChange={(e) => setName(e.target.value)}
           ></TextField>
@@ -52,6 +69,7 @@ const AddCategory = ({ toggleDrawer }) => {
             sx={{ margin: "10px" }}
             variant="outlined"
             label="Description"
+            value={description}
             multiline
             minRows={3}
             onChange={(e) => setDescription(e.target.value)}
@@ -62,6 +80,7 @@ const AddCategory = ({ toggleDrawer }) => {
             sx={{ margin: "10px" }}
             color="success"
             variant="contained"
+            disabled={name && description ? "" : "disabled"}
           >
             Add
           </Button>

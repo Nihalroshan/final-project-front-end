@@ -4,33 +4,32 @@ import {
   Typography,
   TextField,
   Button,
-  // Alert,
+  Alert,
 } from "@mui/material";
-// import axios from "axios";
 import { useState } from "react";
-// import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
+import adminLoginService from "../../services/adminLoginService";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [error, setError] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async () => {
     const user = {
       email: email,
       password: password,
     };
-    // try {
-    //   const { data } = await axios.post(
-    //     "http://localhost:3001/api/users",
-    //     user
-    //   );
-    //   localStorage.setItem("user", data.email);
-    // } catch (err) {
-    //   if (err.response && err.response.status === 400)
-    //     setError(err.response.data);
-    // }
-    console.log(user);
+    try {
+      const response = await adminLoginService.loginAdmin(user);
+      localStorage.setItem("userId", response.user.id);
+      console.log(response);
+      navigate("/admin");
+    } catch (err) {
+      setError(err.response.data);
+      console.log(err.response.data);
+    }
   };
 
   return (
@@ -64,7 +63,7 @@ const LoginPage = () => {
               label="Type your Password"
               variant="outlined"
             />
-            {/* {error && <Alert severity="error">{error}</Alert>} */}
+            {error && <Alert severity="error">{error}</Alert>}
 
             <Button
               type="submit"

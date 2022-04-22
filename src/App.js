@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //admin
-import AdminLayout from "./Layouts/AdminLayout";
+import AdminLayout from "./layouts/AdminLayout";
 import ProductsPage from "./pages/admin/ProductsPage";
 import DashboardPage from "./pages/admin/DashboardPage";
 import CategoriesPage from "./pages/admin/CategoriesPage";
@@ -9,12 +9,14 @@ import ProductPage from "./pages/admin/ProductPage";
 import OrderPage from "./pages/admin/OrderPage";
 import LoginPage from "./pages/admin/LoginPage";
 //client
-import UserLayout from "./Layouts/UserLayout";
+import UserLayout from "./layouts/UserLayout";
 import ClientProductPage from "./pages/client/ProductsPage";
 import ClientCategoriesPage from "./pages/client/CategoriesPage";
+import SingleItemPage from "./pages/client/SingleItemPage";
+import ClientName from "./pages/client/ClientName";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import SingleItemPage from "./pages/client/SingleItemPage";
+import CartPage from "./pages/client/CartPage";
 
 const theme = createTheme({
   palette: {
@@ -23,6 +25,9 @@ const theme = createTheme({
     },
     secondary: {
       main: "#2e3238",
+    },
+    white: {
+      main: "#fff",
     },
   },
 });
@@ -40,9 +45,15 @@ function App() {
             <Route path="categories" element={<CategoriesPage />} />
             <Route path="orders" element={<OrderPage />} />
           </Route>
+          <Route path="/" element={<ClientName />} />
           <Route path="/" element={<UserLayout />}>
-            <Route index element={<ClientProductPage />} />
+            <Route path="/products" element={<ClientProductPage />} />
+            <Route
+              path="/products/:productId"
+              element={<SingleItemPage />}
+            />
             <Route path="/categories" element={<ClientCategoriesPage />} />
+            <Route path="/cart" element={<CartPage />} />
           </Route>
           <Route path="/item" element={<SingleItemPage />} />
         </Routes>

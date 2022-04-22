@@ -11,22 +11,55 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import categoryService from "../../services/categoryService";
+import productService from "../../services/productService";
 
-const AddProduct = ({ toggleDrawer }) => {
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
-  const [category, setCategory] = useState();
-  const [price, setPrice] = useState();
+const AddProduct = ({ toggleDrawer, getProducts }) => {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [categories, setCategories] = useState([]);
 
-  const handleSubmit = () => {
+  const clearInput = () => {
+    setName("");
+    setDescription("");
+    setCategory("");
+    setPrice("");
+  };
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const response = await categoryService.getCategories();
+        console.log(response);
+        setCategories(response);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getCategories();
+  }, []);
+
+  const handleSubmit = async () => {
     const productDetails = {
       name,
       description,
       category,
       price,
     };
-    console.log(productDetails);
+    try {
+      const response = await productService.createProduct(productDetails);
+      if (response.status === 200) {
+        clearInput();
+        // setProductLoader(!productLoader);
+        getProducts();
+      }
+      console.log(response);
+    } catch (err) {
+      console.log(err.response.data);
+    }
   };
 
   return (
@@ -54,6 +87,7 @@ const AddProduct = ({ toggleDrawer }) => {
             sx={{ margin: "10px" }}
             variant="outlined"
             label="Name"
+            value={name}
             onChange={(e) => setName(e.target.value)}
           ></TextField>
           <TextField
@@ -61,6 +95,7 @@ const AddProduct = ({ toggleDrawer }) => {
             variant="outlined"
             label="Description"
             multiline
+            value={description}
             minRows={3}
             onChange={(e) => setDescription(e.target.value)}
           ></TextField>
@@ -71,15 +106,19 @@ const AddProduct = ({ toggleDrawer }) => {
               onChange={(e) => setCategory(e.target.value)}
               label="Category"
             >
-              <MenuItem value="Food">Food</MenuItem>
-              <MenuItem value="Beverage">Beverage</MenuItem>
-              <MenuItem value="Continental">Continental</MenuItem>
+              {categories &&
+                categories.map((category) => {
+                  return (
+                    <MenuItem value={category.name}>{category.name}</MenuItem>
+                  );
+                })}
             </Select>
           </FormControl>
           <TextField
             sx={{ margin: "10px" }}
             variant="outlined"
             label="Price"
+            value={price}
             onChange={(e) => setPrice(e.target.value)}
           ></TextField>
           <Button
@@ -87,6 +126,9 @@ const AddProduct = ({ toggleDrawer }) => {
             sx={{ margin: "10px" }}
             color="success"
             variant="contained"
+            disabled={
+              name && description && category && price ? "" : "disabled"
+            }
           >
             Add
           </Button>
@@ -98,6 +140,9 @@ const AddProduct = ({ toggleDrawer }) => {
           >
             Cancel
           </Button>
+          {/* {addSuccess && (
+            <Alert variant="outlined" severity="success">Product Added Successfully</Alert>
+          )} */}
         </Stack>
       </Box>
     </Container>

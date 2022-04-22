@@ -13,7 +13,7 @@ import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import CategoryIcon from "@mui/icons-material/Category";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const UserLayout = () => {
   const [value, setValue] = useState(0);
@@ -27,7 +27,9 @@ const UserLayout = () => {
           <Typography variant="h5">Menu</Typography>
         </Grid>
       </Grid>
-      <Outlet />
+      <div style={{ marginBottom: "60px" }}>
+        <Outlet />
+      </div>
       <Paper
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}
@@ -40,7 +42,7 @@ const UserLayout = () => {
           showLabels
         >
           <BottomNavigationAction
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/products")}
             icon={<LocalDiningIcon />}
           />
           <BottomNavigationAction
@@ -48,6 +50,7 @@ const UserLayout = () => {
             icon={<CategoryIcon />}
           />
           <BottomNavigationAction
+            onClick={() => navigate("/cart")}
             icon={
               <Badge badgeContent={4} color="primary">
                 <ShoppingCartIcon />
