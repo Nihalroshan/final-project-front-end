@@ -20,6 +20,8 @@ const AddProduct = ({ toggleDrawer, getProducts }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
+  const [fileData, setFileData] = useState([]);
+  const [image, setImage] = useState("");
   const [categories, setCategories] = useState([]);
 
   const clearInput = () => {
@@ -42,15 +44,30 @@ const AddProduct = ({ toggleDrawer, getProducts }) => {
     getCategories();
   }, []);
 
-  const handleSubmit = async () => {
-    const productDetails = {
-      name,
-      description,
-      category,
-      price,
-    };
+  const handleFileChange = ({ target }) => {
+    setFileData(target.files[0]);
+    setImage(target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const productDetails = {
+    //   name,
+    //   description,
+    //   category,
+    //   price,
+    //   // imageUrl,
+    // };
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("price", price);
+    formData.append("image", fileData);
+
     try {
-      const response = await productService.createProduct(productDetails);
+      const response = await productService.createProduct(formData);
       if (response.status === 200) {
         clearInput();
         // setProductLoader(!productLoader);
@@ -62,6 +79,8 @@ const AddProduct = ({ toggleDrawer, getProducts }) => {
     }
   };
 
+  console.log(fileData);
+
   return (
     <Container>
       <Box sx={{ width: 600 }} role="presentation">
@@ -69,11 +88,13 @@ const AddProduct = ({ toggleDrawer, getProducts }) => {
         <Stack sx={{ margin: "10px", padding: "10px" }}>
           <label htmlFor="contained-button-file">
             <Input
+              value={image}
               sx={{ display: "none" }}
               accept="image/*"
               id="contained-button-file"
               multiple
               type="file"
+              onChange={handleFileChange}
             />
             <Button
               sx={{ margin: "10px" }}
@@ -83,6 +104,13 @@ const AddProduct = ({ toggleDrawer, getProducts }) => {
               Upload Image
             </Button>
           </label>
+          {/* <TextField
+            sx={{ margin: "10px" }}
+            variant="outlined"
+            value={imageUrl}
+            label="Image Url"
+            onChange={(e) => setImageUrl(e.target.value)}
+          ></TextField> */}
           <TextField
             sx={{ margin: "10px" }}
             variant="outlined"

@@ -45,14 +45,14 @@ const UserLayout = () => {
             onClick={() => navigate("/products")}
             icon={<LocalDiningIcon />}
           />
-          <BottomNavigationAction
+          {/* <BottomNavigationAction
             onClick={() => navigate("/categories")}
             icon={<CategoryIcon />}
-          />
+          /> */}
           <BottomNavigationAction
             onClick={() => navigate("/cart")}
             icon={
-              <Badge badgeContent={4} color="primary">
+              <Badge  color="primary">
                 <ShoppingCartIcon />
               </Badge>
             }
