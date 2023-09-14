@@ -16,6 +16,7 @@ import ClientName from "./pages/client/ClientName";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CartPage from "./pages/client/CartPage";
+import { useEffect } from "react";
 
 const theme = createTheme({
   palette: {
@@ -31,6 +32,7 @@ const theme = createTheme({
   },
 });
 
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -39,7 +41,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<ProductsPage />} />
-            <Route path="product" element={<ProductPage />} />
+            <Route path="products/:id" element={<ProductPage />} />
             <Route path="products" element={<ProductsPage />} />
             <Route path="categories" element={<CategoriesPage />} />
             <Route path="orders" element={<Orders />} />

@@ -36,6 +36,7 @@ const AddProduct = ({ toggleDrawer, getProducts }) => {
       try {
         const response = await categoryService.getCategories();
         console.log(response);
+        toggleDrawer(false);
         setCategories(response);
       } catch (err) {
         console.log(err);
