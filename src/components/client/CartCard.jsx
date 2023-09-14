@@ -35,7 +35,7 @@ export default function CartCard({ item }) {
       </Box>
       <CardMedia
         component="img"
-        sx={{ width: 130, borderRadius: "100%", margin: "10px" }}
+        sx={{ width: 100, borderRadius: "100%", margin: "10px" }}
         image={item.imageUrl}
         alt=""
       />

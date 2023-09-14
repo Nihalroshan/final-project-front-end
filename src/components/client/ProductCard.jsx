@@ -25,12 +25,14 @@ const ProductCard = ({ product, link }) => {
           }}
         >
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100"
-              image={product.image}
-              sx={{ objectFit: "cover", borderRadius: "50%" }}
-            />
+            {link && (
+              <CardMedia
+                component="img"
+                height="80"
+                image={product.imageUrl}
+                sx={{ objectFit: "cover", borderRadius: "50%" }}
+              />
+            )}
             <CardContent
               sx={{
                 display: "flex",

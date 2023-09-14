@@ -1,0 +1,96 @@
+.titleBarWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .title {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .orderWrapper {
+    display: flex;
+    min-height: 90%;
+  }
+  /* order track */
+  .trackWrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background: #eef2f5;
+    min-width: calc(30% - 20px);
+    overflow: hidden;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .trackTitle {
+    font-size: 20px;
+    padding: 20px 0;
+    text-align: center;
+    background-color: #6642b4;
+    /* background-image: linear-gradient(90deg, #fb5303 0%, #fc8146 100%); */
+    color: white;
+  }
+  .track {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex:1;
+  }
+  .activeTrack {
+    background: rgba(180, 180, 180, 0.35);
+  }
+  /* order card */
+  .orderCardWrapper {
+    border-radius: 6px;
+    background: #4a4a4c;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  .cardTitle {
+    font-size: 10px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
+  }
+  .cardContent {
+    border-radius: 6px;
+    background: white;
+    color: black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .PersonalDetailsWrapper {
+    display: flex;
+  }
+  .personalDetails {
+    display: flex;
+    flex-direction: column;
+  }
+  .name {
+    font-size: 10px;
+  }
+  .address,
+  .phone {
+    font-size: 8px;
+  }
+  
+  .profileImg {
+    width: 33px;
+    height: 33px;
+  }
+  .descWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .descTitle {
+    color: rgba(37, 101, 174, 1);
+    font-size: 10px;
+  }
+  .desc {
+    font-size: 8px;
+  }
+  

@@ -4,8 +4,12 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import orderService from "../../services/orderService";
+// import { useNavigate } from "react-router-dom";
+
 
 export default function PriceCard({ totalPrice, cart }) {
+
+
 
   const handleBuy = async () => {
     const userId = localStorage.getItem("clientId");
@@ -16,6 +20,7 @@ export default function PriceCard({ totalPrice, cart }) {
     };
     try {
       const response = await orderService.createOrder(orderDetails);
+      if(response.status === 200) 
       console.log(response);
     } catch (err) {
       console.log(err.response.data);

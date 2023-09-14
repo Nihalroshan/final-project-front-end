@@ -42,22 +42,6 @@ const AddCategory = ({ toggleDrawer, getCategories }) => {
       <Box sx={{ width: 600 }} role="presentation">
         <Typography variant="h5">Add Category</Typography>
         <Stack sx={{ margin: "10px", padding: "10px" }}>
-          <label htmlFor="contained-button-file">
-            <Input
-              sx={{ display: "none" }}
-              accept="image/*"
-              id="contained-button-file"
-              multiple
-              type="file"
-            />
-            <Button
-              sx={{ margin: "10px" }}
-              variant="contained"
-              component="span"
-            >
-              Upload Image
-            </Button>
-          </label>
           <TextField
             sx={{ margin: "10px" }}
             variant="outlined"

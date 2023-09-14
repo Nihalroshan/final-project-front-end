@@ -7,8 +7,35 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import productService from "../../services/productService";
 
 const ProductPage = () => {
+  const [product, setProduct] = useState({});
+  const { id } = useParams();
+
+  const getProduct = async () => {
+    try {
+      const product = await productService.getProduct(id);
+      setProduct(product);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    // const getProducts = async () => {
+    //   try {
+    //     const products = await productService.getProducts();
+    //     setProducts(products);
+    //   } catch (err) {
+    //     console.log(err.message);
+    //   }
+    // };
+    getProduct();
+  }, []);
+
   return (
     <>
       <Container
@@ -38,10 +65,10 @@ const ProductPage = () => {
                       marginTop: "35px",
                       height: "300px",
                       width: "100%",
-                      borderRadius:"10px"
+                      borderRadius: "10px",
                     }}
                     alt="food"
-                    src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
+                    src={product?.imageUrl}
                   />
                 </Grid>
               </Grid>
@@ -58,31 +85,26 @@ const ProductPage = () => {
                 }}
               >
                 <Grid item style={{ padding: "0 30px" }}>
-                  <Typography variant="h4">Chicken fry</Typography>
-                  <Typography variant="subtitle1">Category</Typography>
+                  <Typography variant="h4">{product?.name}</Typography>
+                  <Typography variant="subtitle1">
+                    {product?.category}
+                  </Typography>
 
                   <Stack direction="row" spacing={2}>
                     <Chip
                       style={{ marginTop: "20px" }}
                       color="primary"
-                      label="PRICE:$44"
+                      label={`PRICE:${product?.price}`}
                     />
-                    <Chip
+                    {/* <Chip
                       style={{ marginTop: "20px" }}
                       color="success"
                       label="IN STOCK"
-                    />
+                    /> */}
                   </Stack>
 
                   <Typography style={{ marginTop: "20px" }} variant="body2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Modi nostrum dolore, vitae, distinctio officia obcaecati
-                    cumque esse quibusdam id odit a maiores tempora inventore?
-                    Explicabo accusamus alias eveniet deleniti amet?Lorem ipsum
-                    dolor sit amet consectetur adipisicing elit. Minima quae
-                    sequi dolore consequuntur quibusdam enim obcaecati tempora!
-                    Autem illo exercitationem vero magnam iusto cupiditate, cum
-                    esse quaerat similique aperiam pariatur.
+                    {product?.description}
                   </Typography>
 
                   <Stack

@@ -1,4 +1,4 @@
-import { Autocomplete, Container, Grid, Stack, TextField } from "@mui/material";
+import { Container, Grid, Stack, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 
 import ProductCard from "../../components/client/ProductCard";
